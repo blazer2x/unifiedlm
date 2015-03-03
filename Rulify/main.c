@@ -964,7 +964,7 @@ while (fgets(line_buff, sizeof line_buff,inputFile) != NULL) {
                     if (posMap[RuleMap[ruleNum][i+1]] > line_len)
                     {continue;}
                     int pos = 0;
-                    posMap[RuleMap[ruleNum][i+1]];
+                    pos = posMap[RuleMap[ruleNum][i+1]];
                     line_buff[pos] = toggleMap[line_buff[pos]];
                     break;
                 }
