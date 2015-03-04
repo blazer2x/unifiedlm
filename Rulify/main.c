@@ -8,7 +8,6 @@
 #include <fcntl.h>
 #include <time.h>
 
-
 //Rules ripped from hashcat/ppro/jtr
 #define RULE_OP_MANGLE_NOOP             ':' // does nothing
 #define RULE_OP_MANGLE_LREST            'l' // lower case all chars
@@ -144,8 +143,6 @@ int remSpace(char * buffer, int pos)
 //Routine which gets the pointer to the read rule
 int validateRule(char * rule_buff)
 {
-
-
     int rule_len = strlen(rule_buff);  //Holds the length (chars) of the rule
     int u = 0; //Variable we use to process loops
 
@@ -1576,7 +1573,7 @@ while (fgets(line_buff, sizeof line_buff,inputFile) != NULL) {
 
         if (skipRule == 0)
         {
-            if strlen(linebuff != 0)
+            if (strlen(line_buff) != 0)
                 puts(line_buff);
         }
     }
