@@ -627,9 +627,9 @@ if (argc == 1)
         fprintf (stderr,"Non-option argument %s\n", argv[index]);
 
 
-    if (rvalue == NULL)
+    if (ivalue== NULL  || rvalue == NULL)
     {
-        fprintf (stderr,"Please specify -r rule file parameters\n");
+        fprintf (stderr,"Please specify input -i input file, -r rule file parameters\n");
         return -1;
     }
 
