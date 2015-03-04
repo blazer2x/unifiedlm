@@ -620,21 +620,19 @@ if (argc == 1)
              else if (isprint (optopt))
                fprintf (stderr, "Unknown option `-%c'.\n", optopt);
              else
-               fprintf (stderr,
-                        "Unknown option character `\\x%x'.\n",
-                        optopt);
+               fprintf (stderr,"Unknown option character `\\x%x'.\n", optopt);
              return 1;
            default:
              abort ();
            }
 
         for (index = optind; index < argc; index++)
-        printf ("Non-option argument %s\n", argv[index]);
+        fprintf (stderr,"Non-option argument %s\n", argv[index]);
 
 
     if (ivalue== NULL  || rvalue == NULL)
     {
-        printf("Please specify input -i input file, -r rule file parameters\n");
+        fprintf (stderr,"Please specify input -i input file, -r rule file parameters\n");
         return -1;
     }
 
@@ -643,17 +641,25 @@ if (argc == 1)
     FILE *readStream = fopen(ruleFile, "rb");
     if (ruleFile == NULL)
     {
-        printf("Error opening rule file %s\n",ruleFile);
+        fprintf (stderr,"Error opening rule file %s\n",ruleFile);
         exit(1);
     }
 
     char inFile[BUFSIZ];
-    sprintf (inFile, "%s", ivalue);
-    FILE *inputFile = fopen(inFile, "rb");
-    if (inFile == NULL)
+    FILE * inputFile;
+    if (ivalue == NULL)
     {
-        printf("Error opening file %s\n",ruleFile);
-        exit(1);
+        inputFile = stdin;
+    }
+    else
+    {
+        sprintf (inFile, "%s", ivalue);
+        inputFile = fopen(inFile, "rb");
+        if (inFile == NULL)
+        {
+            fprintf (stderr,"Error opening file %s\n",ruleFile);
+            exit(1);
+        }
     }
 
     unsigned int sz = 0; //Variable to hold size of file
@@ -794,10 +800,6 @@ while (fgets(line_buff, sizeof line_buff,inputFile) != NULL) {
         for (i = 0; i< strlen(RuleMap[ruleNum]); i++)
         {
 
-            //int line_len = strlen(line_buff); //Get the new size of the string since it changes each loop
-            //printf("%d\n",RuleMap[ruleNum][i]);
-            //printf("SkipRule: %d\n",skipRule);
-            //printf("Skip: %d\n",skip);
             line_len = strlen(line_buff);
             if (skipRule == 1)
             {
@@ -1574,7 +1576,8 @@ while (fgets(line_buff, sizeof line_buff,inputFile) != NULL) {
 
         if (skipRule == 0)
         {
-            puts(line_buff);
+            if strlen(linebuff != 0)
+                puts(line_buff);
         }
     }
 }
